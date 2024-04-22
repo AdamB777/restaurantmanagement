@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{BAF8D52B-29AC-453E-A4F3-7BBE6E8E5E44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{BAF8D52B-29AC-453E-A4F3-7BBE6E8E5E44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelsDB", "ModelsDB\ModelsDB.csproj", "{529D994C-BD0A-469F-A08B-FD67D501F84B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelsDB", "ModelsDB\ModelsDB.csproj", "{529D994C-BD0A-469F-A08B-FD67D501F84B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{4B02AC3C-AF18-43EF-A75B-2ABE04F5BD14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{4B02AC3C-AF18-43EF-A75B-2ABE04F5BD14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantDB", "RestaurantDB\RestaurantDB.csproj", "{CCBC2751-E157-431B-A352-18E94D44CB64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantDB", "RestaurantDB\RestaurantDB.csproj", "{CCBC2751-E157-431B-A352-18E94D44CB64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRestaurant", "TestRestaurant\TestRestaurant.csproj", "{55F5FB4C-E319-452C-B825-3C4D1D948ECB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CCBC2751-E157-431B-A352-18E94D44CB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBC2751-E157-431B-A352-18E94D44CB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBC2751-E157-431B-A352-18E94D44CB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55F5FB4C-E319-452C-B825-3C4D1D948ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55F5FB4C-E319-452C-B825-3C4D1D948ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55F5FB4C-E319-452C-B825-3C4D1D948ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55F5FB4C-E319-452C-B825-3C4D1D948ECB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
