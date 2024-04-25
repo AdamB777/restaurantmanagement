@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Application.CQRS.Customers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -86,6 +87,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<TokenService>();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(
+    typeof(CustomerList.Handler).Assembly
+    ));
 
 var app = builder.Build();
 

@@ -1,12 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.CQRS.Customers;
+using Application.Services;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using ModelsDB.SystemUsers;
 
 namespace Api.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseApiController
     {
-        public IActionResult Index()
+        private readonly UserManager<User> _userManager;
+        private readonly TokenService _tokenService;
+
+        public AccountController(UserManager<User> userManager, TokenService tokenService, IMediator mediator) : base(mediator)
         {
-            return View();
+            _userManager = userManager;
+            _tokenService = tokenService;
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetCustomers()
+        {
+            var result = await _mediator.Send(new CustomerList.Query());
+            return HandleResult(result);
         }
     }
 }
