@@ -475,3 +475,31 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Next.js build output
+.next/
+out/
+
+# Next.js specific cache files
+.next/cache/
+
+# Verbose log files
+*.log
+
+# API secrets environment variable files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Generated files
+.next/static/chunks/pages/*
+.next/server/pages/*
+.next/server/chunks/*
+
+# Next.js telemetry file
+.telemetry.json
+
+# You might want to keep this one based on your project needs
+# It contains builds and exports used for static websites and can be deployed
+# !out/
