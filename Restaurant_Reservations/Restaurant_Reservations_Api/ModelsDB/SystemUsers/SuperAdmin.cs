@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModelsDB
+namespace ModelsDB.SystemUsers
 {
-    public class Owner : Admin
+    public class SuperAdmin : User
     {
     }
 }
