@@ -31,11 +31,11 @@ namespace Application.CQRS.Customers
                 {
                     var customerList = new List<TestCustomer>
                     {
-                        new TestCustomer("Jan", "Jaksis"),
-                        new TestCustomer("Grazyna", "Ze Szczecina"),
-                        new TestCustomer("Mateusz", "Bialy"),
-                        new TestCustomer("Pola", "Testowa"),
-                        new TestCustomer("Basia", "Tortowa")
+                        //new TestCustomer("Jan", "Jaksis"),
+                        //new TestCustomer("Grazyna", "Ze Szczecina"),
+                        //new TestCustomer("Mateusz", "Bialy"),
+                        //new TestCustomer("Pola", "Testowa"),
+                        //new TestCustomer("Basia", "Tortowa")
                     };
 
                     return Result<List<TestCustomer>>.Success(customerList);

@@ -22,11 +22,11 @@ namespace TestRestaurant
             var mediatorMock = new Mock<IMediator>();
             var customerList = new List<TestCustomer>
             {
-                new TestCustomer("Jan", "Jaksis"),
-                new TestCustomer("Grazyna", "Ze Szczecina"),
-                new TestCustomer("Mateusz", "Bialy"),
-                new TestCustomer("Pola", "Testowa"),
-                new TestCustomer("Basia", "Tortowa")
+                //new TestCustomer("Jan", "Jaksis"),
+                //new TestCustomer("Grazyna", "Ze Szczecina"),
+                //new TestCustomer("Mateusz", "Bialy"),
+                //new TestCustomer("Pola", "Testowa"),
+                //new TestCustomer("Basia", "Tortowa")
             };
 
             var expectedResult = Result<List<TestCustomer>>.Success(customerList);

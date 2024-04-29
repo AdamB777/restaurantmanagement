@@ -1,6 +1,7 @@
 ﻿using Application.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RestaurantDB;
 
 namespace Api.Controllers
 {
@@ -9,10 +10,12 @@ namespace Api.Controllers
     public class BaseApiController : ControllerBase
     {
         protected readonly IMediator _mediator;
+        protected readonly RestaurantContext _context;
 
-        public BaseApiController(IMediator mediator)
+        public BaseApiController(IMediator mediator, RestaurantContext context)
         {
             _mediator = mediator;
+            _context = context;
         }
 
         protected ActionResult HandleResult<T>(Result<T> result)

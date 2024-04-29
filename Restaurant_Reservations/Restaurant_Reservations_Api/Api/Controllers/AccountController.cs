@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ModelsDB.SystemUsers;
+using RestaurantDB;
 
 namespace Api.Controllers
 {
@@ -12,7 +13,7 @@ namespace Api.Controllers
         private readonly UserManager<User> _userManager;
         private readonly TokenService _tokenService;
 
-        public AccountController(UserManager<User> userManager, TokenService tokenService, IMediator mediator) : base(mediator)
+        public AccountController(UserManager<User> userManager, TokenService tokenService, IMediator mediator, RestaurantContext context) : base(mediator, context)
         {
             _userManager = userManager;
             _tokenService = tokenService;

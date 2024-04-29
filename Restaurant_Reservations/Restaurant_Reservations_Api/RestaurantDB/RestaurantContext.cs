@@ -14,6 +14,7 @@ namespace RestaurantDB
             
         }
 
+        public DbSet<TestCustomer> TestCustomersDB { get; set; }
         public DbSet<Customer> CustomersDB { get; set; }
         public DbSet<Employee> EmployeesDB { get; set; }
         public DbSet<Owner> OwnersDB { get; set; }
