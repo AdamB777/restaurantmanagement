@@ -1,28 +1,57 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+"use client";
+
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { signInUser } from "@/app/utils/redux/slices/accountSlice";
+import { useAppDispatch } from "@/app/utils/redux/store";
+
 export default function Login() {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const [values, setValues] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  function handleChange(event: any) {
+    const { name, value } = event.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  }
+
+  async function submitForm(event: any) {
+    event.preventDefault();
+    try {
+      const actionResult = await dispatch(signInUser(values));
+
+      if (signInUser.fulfilled.match(actionResult)) {
+        const user = actionResult.payload;
+
+        // Opóźnienie nawigacji do momentu pełnego załadowania komponentu
+        setTimeout(() => {
+          if (user.isOwner) {
+            router.push("/Zalogowany");
+          } else if (user.isEmployee) {
+            router.push("/employee");
+          } else if (user.isCustomer) {
+            router.push("/customer");
+          } else if (user.isSuperAdmin) {
+            router.push("/admin");
+          }
+        }, 0);
+      } else {
+        console.error("Logowanie nie powiodło się");
+      }
+    } catch (error) {
+      console.error("Błąd podczas logowania:", error);
+    }
+  }
+
   return (
     <>
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-white">
-          <body class="h-full">
-          ```
-        */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -36,7 +65,7 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={submitForm}>
             <div>
               <label
                 htmlFor="email"
@@ -51,6 +80,8 @@ export default function Login() {
                   type="email"
                   autoComplete="email"
                   required
+                  value={values.email}
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -64,14 +95,6 @@ export default function Login() {
                 >
                   Password
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -80,6 +103,8 @@ export default function Login() {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={values.password}
+                  onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>

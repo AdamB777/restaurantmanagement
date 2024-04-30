@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import router from "next/router";
 import toast from "react-hot-toast";
 import { Testowy } from "../models/test";
+import { store } from "./redux/store";
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
@@ -10,11 +11,11 @@ axios.defaults.withCredentials = true;
 const responseBody = (response: AxiosResponse) => response.data;
 
 // Interceptor żądań Axios - dodaje token autoryzacji do nagłówków
-// axios.interceptors.request.use((config) => {
-//   const token = store.getState().account.user?.token;
-//   if (token) config.headers.Authorization = `Bearer ${token}`;
-//   return config;
-// });
+axios.interceptors.request.use((config) => {
+  const token = store.getState().account.user?.token;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -113,8 +114,25 @@ function createFormData(item: any) {
 
 const Test = { getStates: () => request.get<Testowy>("test/all/") };
 
+const Account = {
+  login: (values: any) => request.post("account/login", values),
+  // registerPatient: (values: any) =>
+  //   request.post("account/registerpatient", values),
+  // registerDietician: (values: any) =>
+  //   request.post("account/registerdietician", values),
+  // registerAdmin: (values: any) => request.post("admin/createAdmin", values),
+  // registerConfirm: (userId: string, token: string) =>
+  //   request.postRegister<void>(
+  //     /account/registerConfirm?userId=${userId}&token=${token}
+  //   ),
+  currentUser: () => request.get("account/currentUser"),
+  // updatePassword: (userId: number, password: ChangePassword) =>
+  //   request.put<void>(/account/changePassword/${userId}, password),
+};
+
 const agent = {
   Test,
+  Account,
 };
 
 export default agent;

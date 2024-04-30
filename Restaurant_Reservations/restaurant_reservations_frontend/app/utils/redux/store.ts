@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import testSlice from "./slices/testSlice";
+import accountSlice from "./slices/accountSlice";
 
 export const store = configureStore({
   reducer: {
     testState: testSlice,
-    // account: accountSlice.reducer,
+    account: accountSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
