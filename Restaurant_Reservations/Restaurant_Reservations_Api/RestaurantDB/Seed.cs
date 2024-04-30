@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using ModelsDB;
 using ModelsDB.SystemUsers;
-using System.Security.Cryptography.X509Certificates;
 
 namespace RestaurantDB
 {
@@ -10,12 +9,12 @@ namespace RestaurantDB
     {
         public static async Task SeedData(RestaurantContext context, UserManager<User> userManager)
         {
-            await SeedBaseClasses(context);
+            await SeedBaseClasses(context, userManager);
 
             await context.SaveChangesAsync();
         }
 
-        private static async Task SeedBaseClasses(RestaurantContext context)
+        private static async Task SeedBaseClasses(RestaurantContext context, UserManager<User> userManager)
         {
             //if (!context.TestCustomersDB.Any())
             //{
@@ -40,6 +39,97 @@ namespace RestaurantDB
                 };
                 await context.CountryStatesDB.AddRangeAsync(customers);
             }
+
+            #region Users
+
+            //***********************************************OWNER************************
+
+            if (!userManager.Users.Any())
+            {
+                var superAdmin = new Owner
+                {
+                    UserName = "darth.vader@example.com",
+                    FirstName = "Darth",
+                    LastName = "Vader",
+                    Email = "darth.vader@example.com",
+                    PhoneNumber = "1111111111",
+                    isOwner = true,
+                    isEmployee = false,
+                    isSuperAdmin = false,
+                    isCustomer = false,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(superAdmin, "Pa$$w0rd5555555554!");
+
+                //***********************************************SUPERADMIN************************
+
+                var admin = new SuperAdmin
+                {
+                    UserName = "jannzz.kowalski@example.com",
+                    FirstName = "Janusz",
+                    LastName = "Kowalski",
+                    Email = "jannzz.kowalski@example.com",
+                    PhoneNumber = "500100200",
+                    isOwner = false,
+                    isEmployee = false,
+                    isSuperAdmin = true,
+                    isCustomer = false,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(admin, "Pa$$w0rd5555555554!");
+
+                //***********************************************EMPLOYEE************************
+                var patient1 = new Employee
+                {
+                    UserName = "tomasz.zielinski@example.com",
+                    FirstName = "Tomasz",
+                    LastName = "Zieliński",
+                    Email = "tomasz.zielinski@example.com",
+                    PhoneNumber = "500600700",
+                    isOwner = false,
+                    isEmployee = true,
+                    isSuperAdmin = false,
+                    isCustomer = false,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(patient1, "Pa$$w0rd5555555554!");
+
+                var patient2 = new Employee
+                {
+                    UserName = "aleksandra.nowak@example.com",
+                    FirstName = "Aleksandra",
+                    LastName = "Nowak",
+                    Email = "aleksandra.nowak@example.com",
+                    PhoneNumber = "501601701",
+                    isOwner = false,
+                    isEmployee = true,
+                    isSuperAdmin = false,
+                    isCustomer = false,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(patient2, "Pa$$w0rd5555555554!");
+
+                var patient3 = new Employee
+                {
+                    UserName = "piotr.kowal@example.com",
+                    FirstName = "Piotr",
+                    LastName = "Kowal",
+                    Email = "piotr.kowal@example.com",
+                    PhoneNumber = "502602702",
+                    isOwner = false,
+                    isEmployee = true,
+                    isSuperAdmin = false,
+                    isCustomer = false,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(patient3, "Pa$$w0rd5555555554!");
+
+                
+            }
+
+            await context.SaveChangesAsync();
+
+            #endregion
         }
     }
 }

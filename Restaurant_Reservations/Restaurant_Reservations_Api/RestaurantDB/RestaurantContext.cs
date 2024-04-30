@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using ModelsDB;
@@ -7,11 +8,10 @@ using System.Diagnostics;
 
 namespace RestaurantDB
 {
-    public class RestaurantContext:DbContext
+    public class RestaurantContext : IdentityDbContext<User, Role, int>
     {
         public RestaurantContext(DbContextOptions options) : base(options)
         {
-            
         }
 
         public DbSet<TestCustomer> TestCustomersDB { get; set; }
