@@ -89,7 +89,9 @@ export const signInUser = createAsyncThunk<User, FormData>(
       localStorage.setItem("user", JSON.stringify(user));
       return user;
     } catch (error) {
-      return thunkAPI.rejectWithValue({ error });
+      console.error("SignIn error:", error);
+      // return thunkAPI.rejectWithValue({ error });
+      return thunkAPI.rejectWithValue({ error: error || "Unknown error" });
     }
   }
 );
@@ -132,8 +134,9 @@ export const accountSlice = createSlice({
   reducers: {
     signOut: (state) => {
       state.user = null;
+      state.isLoading = false;
+      state.isUserLoaded = false;
       localStorage.removeItem("user");
-      //   router.navigate("/");
     },
     setUser: (state, action) => {
       state.user = action.payload;
