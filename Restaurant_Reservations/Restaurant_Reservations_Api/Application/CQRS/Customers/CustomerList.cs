@@ -1,5 +1,7 @@
 ﻿using Application.Core;
+using Application.DTOs.CustomersDTO;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ModelsDB.SystemUsers;
 using RestaurantDB;
 using System;
@@ -13,9 +15,9 @@ namespace Application.CQRS.Customers
 {
     public class CustomerList
     {
-        public class Query : IRequest<Result<List<TestCustomer>>> { }
+        public class Query : IRequest<Result<List<CustomerGetDTO>>> { }
 
-        public class Handler : IRequestHandler<Query, Result<List<TestCustomer>>>
+        public class Handler : IRequestHandler<Query, Result<List<CustomerGetDTO>>>
         {
             private readonly RestaurantContext _context;
 
@@ -24,26 +26,26 @@ namespace Application.CQRS.Customers
                 _context = context;
             }
 
-            public async Task<Result<List<TestCustomer>>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<CustomerGetDTO>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 
                 try
                 {
-                    var customerList = new List<TestCustomer>
-                    {
-                        //new TestCustomer("Jan", "Jaksis"),
-                        //new TestCustomer("Grazyna", "Ze Szczecina"),
-                        //new TestCustomer("Mateusz", "Bialy"),
-                        //new TestCustomer("Pola", "Testowa"),
-                        //new TestCustomer("Basia", "Tortowa")
-                    };
+                    var customerList = await 
+                        (from customer in _context.CustomersDB
+                        select new CustomerGetDTO {
+                            Id = customer.Id,
+                            FirstName = customer.FirstName,
+                            LastName = customer.LastName,
+                            Email = customer.Email,
+                        }).ToListAsync(cancellationToken);
 
-                    return Result<List<TestCustomer>>.Success(customerList);
+                    return Result<List<CustomerGetDTO>>.Success(customerList);
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Przyczyna niepowodzenia: " + ex);
-                    return Result<List<TestCustomer>>.Failure("Wystąpił błąd podczas pobierania lub mapowania danych.");
+                    return Result<List<CustomerGetDTO>>.Failure("Wystąpił błąd podczas pobierania lub mapowania danych.");
                 }
             }
         }

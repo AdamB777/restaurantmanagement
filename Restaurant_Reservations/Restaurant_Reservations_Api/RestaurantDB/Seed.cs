@@ -124,7 +124,54 @@ namespace RestaurantDB
                 };
                 await userManager.CreateAsync(patient3, "Pa$$w0rd5555555554!");
 
-                
+
+                //*********************************************** CUSTOMER ************************
+
+                var customer = new Customer
+                {
+                    UserName = "jacenty@example.com",
+                    FirstName = "Jacek",
+                    LastName = "Blabla",
+                    Email = "jacenty@example.com",
+                    PhoneNumber = "5496215776",
+                    isOwner = false,
+                    isEmployee = false,
+                    isSuperAdmin = false,
+                    isCustomer = true,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(customer, "Pa$$w0rd5555555554!");
+
+                var customer2 = new Customer
+                {
+                    UserName = "grazyna123@example.com",
+                    FirstName = "Grazyna",
+                    LastName = "ZeSzczecina",
+                    Email = "grazyna.zeszczecina@example.com",
+                    PhoneNumber = "111243212",
+                    isOwner = false,
+                    isEmployee = false,
+                    isSuperAdmin = false,
+                    isCustomer = true,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(customer2, "Pa$$w0rd5555555554!");
+
+                var customer3 = new Customer
+                {
+                    UserName = "meus@example.com",
+                    FirstName = "Paul",
+                    LastName = "Wesley",
+                    Email = "paul.wesley@example.com",
+                    PhoneNumber = "24284456",
+                    isOwner = false,
+                    isEmployee = false,
+                    isSuperAdmin = false,
+                    isCustomer = true,
+                    EmailConfirmed = true
+                };
+                await userManager.CreateAsync(customer3, "Pa$$w0rd5555555554!");
+
             }
 
             await context.SaveChangesAsync();

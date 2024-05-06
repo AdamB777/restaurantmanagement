@@ -22,6 +22,7 @@ namespace Api.Controllers
             _tokenService = tokenService;
         }
 
+        //[Authorize (Roles = "Employee, Owner")]
         [HttpGet("all")]
         public async Task<IActionResult> GetCustomers()
         {
