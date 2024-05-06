@@ -3,6 +3,7 @@ import router from "next/router";
 import toast from "react-hot-toast";
 import { Testowy } from "../models/test";
 import { store } from "./redux/store";
+import { Customer } from "../models/customer";
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
 axios.defaults.withCredentials = true;
@@ -130,8 +131,13 @@ const Account = {
   //   request.put<void>(/account/changePassword/${userId}, password),
 };
 
+const Customers = {
+  getAllCustomers: () => request.get<Customer>("account/all/"),
+};
+
 const agent = {
   Test,
+  Customers,
   Account,
 };
 
