@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signInUser } from "@/app/utils/redux/slices/accountSlice";
 import { useAppDispatch } from "@/app/utils/redux/store";
+import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -29,10 +30,21 @@ export default function Login() {
 
       if (signInUser.fulfilled.match(actionResult)) {
         const user = actionResult.payload;
+        const token = user?.token;
+        console.log("user token ==========> ", user.token);
+        const decodedToken: any = jwtDecode(token!.toString());
+        console.log("DECODED TOKEN:  ", decodedToken);
 
+        // Zapisani roli uzytkownika do stanu
+        const role =
+          decodedToken[
+            "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+          ];
+
+        console.log("user role is ...", role);
         // Opóźnienie nawigacji do momentu pełnego załadowania komponentu
         setTimeout(() => {
-          if (user.isOwner) {
+          if (role === "Owner") {
             router.push("/Zalogowany");
           } else if (user.isEmployee) {
             router.push("/employee");
