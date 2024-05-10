@@ -22,7 +22,7 @@ namespace Api.Controllers
             _tokenService = tokenService;
         }
 
-        //[Authorize (Roles = "Employee, Owner")]
+        [Authorize(Roles = "Owner")]
         [HttpGet("all")]
         public async Task<IActionResult> GetCustomers()
         {
@@ -54,10 +54,6 @@ namespace Api.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 Token = token,
-                IsOwner = user.isOwner,
-                IsEmployee = user.isEmployee,
-                IsCustomer = user.isCustomer,
-                IsSuperAdmin = user.isSuperAdmin
             };
         }
 
@@ -78,10 +74,6 @@ namespace Api.Controllers
                 Id = user.Id,
                 Email = user.Email,
                 Token = await _tokenService.GenerateToken(user),
-                IsOwner = user.isOwner,
-                IsEmployee = user.isEmployee,
-                IsCustomer = user.isCustomer,
-                IsSuperAdmin = user.isSuperAdmin
             };
         }
     }

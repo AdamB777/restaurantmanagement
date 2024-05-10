@@ -53,10 +53,6 @@ namespace RestaurantDB
                     LastName = "Vader",
                     Email = "darth.vader@example.com",
                     PhoneNumber = "1111111111",
-                    isOwner = true,
-                    isEmployee = false,
-                    isSuperAdmin = false,
-                    isCustomer = false,
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(superAdmin, "Pa$$w0rd5555555554!");
@@ -70,10 +66,6 @@ namespace RestaurantDB
                     LastName = "Kowalski",
                     Email = "jannzz.kowalski@example.com",
                     PhoneNumber = "500100200",
-                    isOwner = false,
-                    isEmployee = false,
-                    isSuperAdmin = true,
-                    isCustomer = false,
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(admin, "Pa$$w0rd5555555554!");
@@ -86,10 +78,6 @@ namespace RestaurantDB
                     LastName = "Zieliński",
                     Email = "tomasz.zielinski@example.com",
                     PhoneNumber = "500600700",
-                    isOwner = false,
-                    isEmployee = true,
-                    isSuperAdmin = false,
-                    isCustomer = false,
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(patient1, "Pa$$w0rd5555555554!");
@@ -101,10 +89,6 @@ namespace RestaurantDB
                     LastName = "Nowak",
                     Email = "aleksandra.nowak@example.com",
                     PhoneNumber = "501601701",
-                    isOwner = false,
-                    isEmployee = true,
-                    isSuperAdmin = false,
-                    isCustomer = false,
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(patient2, "Pa$$w0rd5555555554!");
@@ -116,10 +100,6 @@ namespace RestaurantDB
                     LastName = "Kowal",
                     Email = "piotr.kowal@example.com",
                     PhoneNumber = "502602702",
-                    isOwner = false,
-                    isEmployee = true,
-                    isSuperAdmin = false,
-                    isCustomer = false,
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(patient3, "Pa$$w0rd5555555554!");
@@ -134,10 +114,6 @@ namespace RestaurantDB
                     LastName = "Blabla",
                     Email = "jacenty@example.com",
                     PhoneNumber = "5496215776",
-                    isOwner = false,
-                    isEmployee = false,
-                    isSuperAdmin = false,
-                    isCustomer = true,
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(customer, "Pa$$w0rd5555555554!");
@@ -149,10 +125,6 @@ namespace RestaurantDB
                     LastName = "ZeSzczecina",
                     Email = "grazyna.zeszczecina@example.com",
                     PhoneNumber = "111243212",
-                    isOwner = false,
-                    isEmployee = false,
-                    isSuperAdmin = false,
-                    isCustomer = true,
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(customer2, "Pa$$w0rd5555555554!");
@@ -164,10 +136,6 @@ namespace RestaurantDB
                     LastName = "Wesley",
                     Email = "paul.wesley@example.com",
                     PhoneNumber = "24284456",
-                    isOwner = false,
-                    isEmployee = false,
-                    isSuperAdmin = false,
-                    isCustomer = true,
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(customer3, "Pa$$w0rd5555555554!");

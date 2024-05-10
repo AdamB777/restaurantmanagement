@@ -12,10 +12,6 @@ namespace ModelsDB.SystemUsers
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool isSuperAdmin { get; set; } = false;
-        public bool isOwner { get; set; }
-        public bool isEmployee { get; set; }
-        public bool isCustomer { get; set; }
 
         public bool isActive { get; set; } = true;
         public DateTime dateAdded { get; set; } = DateTime.Now;
