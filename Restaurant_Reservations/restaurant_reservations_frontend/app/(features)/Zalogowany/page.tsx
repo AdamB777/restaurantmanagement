@@ -2,13 +2,13 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { jwtDecode } from "jwt-decode";
 import { useAppDispatch, useAppSelector } from "@/app/utils/redux/store";
 import { signOut } from "@/app/utils/redux/slices/accountSlice";
 import {
   customersSelectors,
   getAllCustomersAsync,
 } from "@/app/utils/redux/slices/customerSlice";
+import { DecodeToken } from "@/app/utils/helpers/manageToken";
 
 export default function Zalogowany() {
   const dispatch = useAppDispatch();
@@ -24,17 +24,14 @@ export default function Zalogowany() {
       return;
     }
     try {
-      const decodedToken: any = jwtDecode(token);
-      const role =
-        decodedToken[
-          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-        ];
+      const role = DecodeToken(token);
+
       if (role !== "Owner") {
         console.error("Nie jesteś właścicielem: dostęp ograniczony");
         router.push("/error");
         return;
       }
-      console.log("DECODED TOKEN: ", decodedToken);
+      // TODO  else
     } catch (error) {
       console.error("Błąd dekodowania tokenu: ", error);
       router.push("/");
