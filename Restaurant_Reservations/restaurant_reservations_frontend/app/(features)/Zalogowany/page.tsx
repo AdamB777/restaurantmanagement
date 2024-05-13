@@ -9,45 +9,54 @@ import {
   getAllCustomersAsync,
 } from "@/app/utils/redux/slices/customerSlice";
 import { DecodeToken } from "@/app/utils/helpers/manageToken";
+import { parseCookies } from 'nookies';
+import { GetServerSideProps } from "next";
 
 export default function Zalogowany() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { user } = useAppSelector((state) => state.account);
   const customer = useAppSelector(customersSelectors.selectAll);
-  const token = user?.token;
+  
+
 
   useEffect(() => {
-
-    if (!token) {
-      console.log("Token nie istnieje, przekierowanie do logowania...");
-      router.push("/");
-      return;
+    const token = user?.token;
+    if (token) {
+      document.cookie = `token=${token}; path=/; Secure; HttpOnly; SameSite=Lax;`;
     }
-    try {
-      const role = DecodeToken(token);
-
-      if (role !== "Owner") {
-        console.error("Nie jesteś właścicielem: dostęp ograniczony");
-        router.push("/error");
+    const handleAuth = async () => {
+      const localUser = localStorage.getItem('user');
+      if (!localUser) {
+        router.push('/');
         return;
       }
-      // TODO  else
-    } catch (error) {
-      console.error("Błąd dekodowania tokenu: ", error);
-      router.push("/");
-    }
-  }, [token, router]);
+      const userData = JSON.parse(localUser);
+      const token = userData?.token;
+      if (!token) {
+        console.log("Token nie istnieje, przekierowanie do logowania...");
+        router.push('/');
+        return;
+      }
 
-  useEffect(() => {
-    dispatch(fetchCurrentUser)
-    dispatch(getAllCustomersAsync());
-  }, [dispatch]);
+      const decodedToken = DecodeToken(token);
+      if (decodedToken !== 'Owner') {
+        console.error("Nie jesteś właścicielem: dostęp ograniczony");
+        router.push('/');
+        return;
+      }
+      dispatch(fetchCurrentUser());
+      dispatch(getAllCustomersAsync());
+    };
+
+    handleAuth();
+  }, []);
 
   const logout = () => {
     dispatch(signOut());
     router.push("/");
   };
+  
 
   return (
     <>

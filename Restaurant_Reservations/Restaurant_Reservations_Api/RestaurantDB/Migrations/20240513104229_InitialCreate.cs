@@ -275,10 +275,10 @@ namespace RestaurantDB.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "1a6464cf-0cb5-4bda-8edb-5aa4950ab234", "SuperAdmin", "SUPERADMIN" },
-                    { 2, "a6dc595e-922d-4e47-a9ff-791ad1671175", "Owner", "OWNER" },
-                    { 3, "e24901b2-90c2-452c-ac41-cc4a04079408", "Employee", "EMPLOYEE" },
-                    { 4, "e6911ec3-f987-4eca-a114-90b3de6fa83b", "Customer", "CUSTOMER" }
+                    { 1, "cb93c740-1614-4ce7-9156-294bf42844f9", "SuperAdmin", "SUPERADMIN" },
+                    { 2, "c1aa641d-c6bb-4556-8c38-eb4ad7366285", "Owner", "OWNER" },
+                    { 3, "e794cfd8-4c5a-45ba-95e1-265b329584d2", "Employee", "EMPLOYEE" },
+                    { 4, "5d3e81ed-461f-4a6c-b5a5-2deb5646e611", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.CreateIndex(

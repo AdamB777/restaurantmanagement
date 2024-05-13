@@ -1,20 +1,24 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { signInUser } from "@/app/utils/redux/slices/accountSlice";
 import { useAppDispatch } from "@/app/utils/redux/store";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { fetchCurrentUser, signInUser } from "@/app/utils/redux/slices/accountSlice";
 import { DecodeToken } from "@/app/utils/helpers/manageToken";
 
 export default function Login() {
   const dispatch = useAppDispatch();
   const router = useRouter();
-
+  
   const [values, setValues] = React.useState({
     email: "",
     password: "",
   });
 
+  useEffect(() => {
+    // dispatch(fetchCurrentUser());
+  }, [dispatch]);
+  
   function handleChange(event: any) {
     const { name, value } = event.target;
     setValues((prevValues) => ({
@@ -22,7 +26,7 @@ export default function Login() {
       [name]: value,
     }));
   }
-
+  
   async function submitForm(event: any) {
     event.preventDefault();
     try {
@@ -36,10 +40,10 @@ export default function Login() {
         const role = DecodeToken(token);
 
         console.log("user role is ...", role);
-
+        dispatch(fetchCurrentUser())
         setTimeout(() => {
           if (role === "Owner") {
-            router.push("/employee");
+            router.push("/Zalogowany/");
           } else if (user.isEmployee) {
             router.push("/owner");
           } else if (user.isCustomer) {
@@ -55,7 +59,6 @@ export default function Login() {
       console.error("Błąd podczas logowania:", error);
     }
   }
-
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
