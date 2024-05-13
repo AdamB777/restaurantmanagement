@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/app/utils/redux/store";
-import { signOut } from "@/app/utils/redux/slices/accountSlice";
+import { fetchCurrentUser, signOut } from "@/app/utils/redux/slices/accountSlice";
 import {
   customersSelectors,
   getAllCustomersAsync,
@@ -18,6 +18,7 @@ export default function Zalogowany() {
   const token = user?.token;
 
   useEffect(() => {
+
     if (!token) {
       console.log("Token nie istnieje, przekierowanie do logowania...");
       router.push("/");
@@ -39,6 +40,7 @@ export default function Zalogowany() {
   }, [token, router]);
 
   useEffect(() => {
+    dispatch(fetchCurrentUser)
     dispatch(getAllCustomersAsync());
   }, [dispatch]);
 

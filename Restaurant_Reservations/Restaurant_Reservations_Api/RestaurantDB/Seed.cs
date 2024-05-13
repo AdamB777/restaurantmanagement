@@ -139,8 +139,19 @@ namespace RestaurantDB
                     EmailConfirmed = true
                 };
                 await userManager.CreateAsync(customer3, "Pa$$w0rd5555555554!");
-
             }
+
+            //****************************USERROLE********************
+            if (!context.UserRoles.Any())
+            {
+                var role1 = new IdentityUserRole<int>
+                {
+                    UserId = 1,
+                    RoleId = 2,
+                };
+            }
+
+
 
             await context.SaveChangesAsync();
 

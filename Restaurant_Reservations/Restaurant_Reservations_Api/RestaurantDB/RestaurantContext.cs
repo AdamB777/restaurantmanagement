@@ -28,13 +28,13 @@ namespace RestaurantDB
             modelBuilder.Entity<User>()
                .HasIndex(u => new { u.FirstName, u.LastName })
                .HasDatabaseName("IX_FirstNameLastName");
-            modelBuilder.Entity<IdentityRole>()
-                .HasData(
-                new IdentityRole { Name = "SuperAdmin", NormalizedName = "SUPERADMIN" },
-                new IdentityRole { Name = "Owner", NormalizedName = "OWNER" },
-                new IdentityRole { Name = "Employee", NormalizedName = "EMPLOYEE" },
-                new IdentityRole { Name = "Customer", NormalizedName = "CUSTOMER" }
-                );
+            modelBuilder.Entity<Role>()
+               .HasData(
+                    new Role { Id = 1, Name = "SuperAdmin", NormalizedName = "SUPERADMIN" },
+                    new Role { Id = 2, Name = "Owner", NormalizedName = "OWNER" },
+                    new Role { Id = 3, Name = "Employee", NormalizedName = "EMPLOYEE" },
+                    new Role { Id = 4, Name = "Customer", NormalizedName = "CUSTOMER" }
+    );
             modelBuilder.Entity<IdentityUserLogin<int>>(b =>
             {
                 b.HasKey(login => new { login.ProviderKey, login.LoginProvider });
