@@ -31,7 +31,7 @@ export default function Login() {
       if (signInUser.fulfilled.match(actionResult)) {
         const user = actionResult.payload;
         const token = user?.token;
-        console.log("user token ==========> ", user.token);
+        console.log("user token ==========> ", token);
 
         const role = DecodeToken(token);
 
@@ -39,9 +39,9 @@ export default function Login() {
 
         setTimeout(() => {
           if (role === "Owner") {
-            router.push("/Zalogowany");
-          } else if (user.isEmployee) {
             router.push("/employee");
+          } else if (user.isEmployee) {
+            router.push("/owner");
           } else if (user.isCustomer) {
             router.push("/customer");
           } else if (user.isSuperAdmin) {
