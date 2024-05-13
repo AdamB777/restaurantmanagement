@@ -5,10 +5,8 @@ import { store } from "./utils/redux/store";
 
 export default function Home() {
   return (
-    <Provider store={store}>
     <div>
       <Login />
     </div>
-    </Provider>
   );
 }

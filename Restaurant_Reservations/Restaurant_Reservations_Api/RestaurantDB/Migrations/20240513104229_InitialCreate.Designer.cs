@@ -12,7 +12,7 @@ using RestaurantDB;
 namespace RestaurantDB.Migrations
 {
     [DbContext(typeof(RestaurantContext))]
-    [Migration("20240512084116_InitialCreate")]
+    [Migration("20240513104229_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -298,28 +298,28 @@ namespace RestaurantDB.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "1a6464cf-0cb5-4bda-8edb-5aa4950ab234",
+                            ConcurrencyStamp = "cb93c740-1614-4ce7-9156-294bf42844f9",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "a6dc595e-922d-4e47-a9ff-791ad1671175",
+                            ConcurrencyStamp = "c1aa641d-c6bb-4556-8c38-eb4ad7366285",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "e24901b2-90c2-452c-ac41-cc4a04079408",
+                            ConcurrencyStamp = "e794cfd8-4c5a-45ba-95e1-265b329584d2",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "e6911ec3-f987-4eca-a114-90b3de6fa83b",
+                            ConcurrencyStamp = "5d3e81ed-461f-4a6c-b5a5-2deb5646e611",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
